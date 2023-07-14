@@ -1,0 +1,13 @@
+{
+    "name": "simple_GO!",
+    "short_name": "Go!",
+    "description": "game of Go!",
+    "icons":[
+      {"src":"/src/img/icon/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},
+      {"src":"/src/img/icon/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#1f1f1f",
+    "theme_color": "#1f1f1f"
+  }

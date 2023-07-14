@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Simple Go</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/src/img/icon/favicon.ico">
+    <script>
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/sw.js")
+              .then(registration => {
+                console.log("Service Worker registered:", registration);
+              })
+              .catch(error => {
+                console.error("Service Worker registration failed:", error);
+              });
+          });
+        }
+      </script>
 </head>
 
 <body>
@@ -20,7 +34,7 @@
         align-items: center;
     }
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/src/main.js"  type="module">
     /*
     game mode list
