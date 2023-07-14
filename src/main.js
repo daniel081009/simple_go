@@ -89,20 +89,20 @@ class help extends LitElement {
       return html`
         <div class="rules">
           <div>
-            <img src="/src/img/둘러싸면_먹힘.gif">
+            <img src="./src/img/둘러싸면_먹힘.gif">
             <p>상대방을 가로 세로로 둘러싸면 승리에요</p>
           </div>
           <div>
-            <img src="/src/img/벽_이용가능.gif">
+            <img src="./src/img/벽_이용가능.gif">
             <p>벽을 이용할 수 있어요</p>
           </div>
           <div>
-            <img src="/src/img/집이_있으면_잡을수_없다.gif">
+            <img src="./src/img/집이_있으면_잡을수_없다.gif">
             <p>빈 공간을 가로,세로로 둘러싸면 집이 생겨요<br>집과 연결된 돌은 잡을 수 없어요</p>
           </div>
           <div>
-            <img src="/src/img/장애물을 이용 가능.gif">
-            <img src="/src/img/장애물을_이용해서_잡을_수_있다.gif">
+            <img src="./src/img/장애물을 이용 가능.gif">
+            <img src="./src/img/장애물을_이용해서_잡을_수_있다.gif">
             <p>특수한 벽이 있는데 이 벽을 이용할 수 있어요</p>
           </div>
           <button @click=${() => document.location.href="/"}>다봤다!</button>
@@ -434,7 +434,7 @@ class gamepage extends LitElement {
     render() {
         return html`
             <div class="tool">
-                <img class="flipy" src="/src/img/back.svg" @click=${
+                <img class="flipy" src="./src/img/back.svg" @click=${
                     ()=>{
                         this.pl1_back = !this.pl1_back
                         this.requestUpdate()
@@ -450,7 +450,7 @@ class gamepage extends LitElement {
                     }
                     this.game.ChangeEnd()
                 }}><span class="flip">End</span></div>
-                <img class="flipy ${this.pl2_back ?"":"hidden"}" src="/src/img/confirm.svg" @click=${()=>{
+                <img class="flipy ${this.pl2_back ?"":"hidden"}" src="./src/img/confirm.svg" @click=${()=>{
                   if (this.pl2_back){
                     this.game.back()
                     this.pl1_back=false;
@@ -461,7 +461,7 @@ class gamepage extends LitElement {
             </div>
             <div id="map"></div>
             <div class="tool">
-                <img src="/src/img/confirm.svg" class="${this.pl1_back ?"":"hidden"}" @click=${()=>{
+                <img src="./src/img/confirm.svg" class="${this.pl1_back ?"":"hidden"}" @click=${()=>{
                     if (this.pl1_ok){
                         this.game.back()
                         this.pl1_back=false;
@@ -479,7 +479,7 @@ class gamepage extends LitElement {
                     }
                     this.game.ChangeEnd()
                 }}>End</div>
-                <img src="/src/img/back.svg" @click=${
+                <img src="./src/img/back.svg" @click=${
                     ()=>{
                         this.pl2_back = !this.pl2_back
                         this.requestUpdate()
