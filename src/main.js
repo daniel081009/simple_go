@@ -8,10 +8,10 @@ import {
 
 const router = new Router(document.querySelector("body"));
 router.setRoutes([
-  { path: "/", component: "home-page" },
-  {path:"/rule", component:"help-page"},
-  { path: "/game/:mode", component: "game-page" },
-  { path: "(.*)", component: "page404-page" },
+  { path: "/simple_go/", component: "home-page" },
+  {path:"/simple_go/rule", component:"help-page"},
+  { path: "/simple_go/game/:mode", component: "game-page" },
+  { path: "/simple_go/(.*)", component: "page404-page" },
 ]);
 
 
@@ -105,7 +105,7 @@ class help extends LitElement {
             <img src="./src/img/장애물을_이용해서_잡을_수_있다.gif">
             <p>특수한 벽이 있는데 이 벽을 이용할 수 있어요</p>
           </div>
-          <button @click=${() => document.location.href="/"}>다봤다!</button>
+          <button @click=${() => document.location.href="/simple_go/"}>다봤다!</button>
         </div>
       `;
     }
@@ -240,7 +240,7 @@ class homepage extends LitElement {
         </div>
         <button @click=${this.startGame}>게임 시작</button>
         <div class="help" @click=${() => {
-            document.location.href = "/rule";
+            document.location.href = "/simple_go/rule";
         }}>rule</div>
       `;
     }
