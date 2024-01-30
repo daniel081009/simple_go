@@ -6,13 +6,24 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
 
-const router = new Router(document.querySelector("body"));
-router.setRoutes([
-  { path: "/simple_go/", component: "home-page" },
-  {path:"/simple_go/rule", component:"help-page"},
-  { path: "/simple_go/game/:mode", component: "game-page" },
-  { path: "/simple_go/(.*)", component: "page404-page" },
-]);
+let currentPage = 'home'; // 상태 변수
+
+function renderPage(data) {
+  if (currentPage === 'home') {
+    return `<home-page></home-page>`;
+  } else if (currentPage === 'help') {
+    return `<help-page></help-page>`;
+  } else if (currentPage === 'game') {
+    return `<game-page data=${JSON.stringify(data)}></game-page>`;
+  } else {
+    return `<page404-page></page404-page>`;
+  }
+}
+
+function navigateTo(page, data = null) {
+  currentPage = page;
+  document.querySelector('body').innerHTML = renderPage(data);
+}
 
 
 class help extends LitElement {
@@ -105,7 +116,7 @@ class help extends LitElement {
             <img src="./src/img/장애물을_이용해서_잡을_수_있다.gif">
             <p>특수한 벽이 있는데 이 벽을 이용할 수 있어요</p>
           </div>
-          <button @click=${() => document.location.href="/simple_go/"}>다봤다!</button>
+          <button @click=${() => navigateTo("home")}>다봤다!</button>
         </div>
       `;
     }
@@ -214,7 +225,7 @@ class homepage extends LitElement {
         })
         return;
       }
-      document.location.href = `/game/${this.selectedMode}`;
+      navigateTo("game", {"selectedMode":this.selectedMode});
     }
   
     render() {
@@ -240,7 +251,7 @@ class homepage extends LitElement {
         </div>
         <button @click=${this.startGame}>게임 시작</button>
         <div class="help" @click=${() => {
-            document.location.href = "/simple_go/rule";
+          navigateTo("help");
         }}>rule</div>
       `;
     }
@@ -384,8 +395,15 @@ class gamepage extends LitElement {
     random(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+    connectedCallback() {
+      super.connectedCallback();
+      this.data = JSON.parse(this.getAttribute('data'));
+      console.log(this.data);
+      // 이제 selectedMode를 사용할 수 있습니다.
+    }
     constructor() {
         super();
+        console.log("gamepage")
         /** @type{Game} */
         this.game = null;
             
@@ -394,12 +412,9 @@ class gamepage extends LitElement {
         (async () => {
             await this.updateComplete;
 
-            const path = window.location.pathname;
-            const match = path.match(/^\/game\/(.*)$/);
             let mode ="normal"
-            if (match) {
-                mode = match[1];
-            }
+            mode = this.data.selectedMode;
+            
             let wall = [{x:4,y:4},]
             let sp = mode.split("_")
             if (sp[0] === "random") {
